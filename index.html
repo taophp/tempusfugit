@@ -109,7 +109,7 @@
     <div id="container">
         <div id="intro">
             <h1>Tempus fugit</h1>
-            <h2>One square per week</h2>
+            <h2 id="subtitle"></h2>
             <h3><a href="https://stephanemourey.fr" target="_blank">Stéphane Mourey</a></h3>
             <blockquote id="quote"></blockquote>
             <form id="user-data-form">
@@ -119,6 +119,7 @@
                 <input type="number" id="lifeExpectancy" />
                 <input type="submit"></input>
             </form>
+            <p id="cure"></p>
         </div>
     </div>
     <footer id="footer">
@@ -153,6 +154,8 @@
                 invalidNumber: "Veuillez entrer un nombre entier valide. Réessayez.",
                 here: "Vous êtes ici",
                 motto: "La seule chose que vous maîtrisez, c'est ce à quoi vous allez consacrer le reste de votre temps.",
+                subtitle: "Une case par semaine",
+                cure: "Pour soigner la procrastination, faire de ce site votre page d'accueil.",
             },
             en: {
                 birthdate: "Your birth date",
@@ -162,6 +165,9 @@
                 invalidNumber: "Please enter a valid integer. Try again.",
                 here: "You are here",
                 motto: "The only thing you control is what you will spend the rest of your time on.",
+                subtitle: "One square per week",
+                cure: "To cure procrastination, make this site your home page.",
+
             },
         };
 
@@ -172,6 +178,8 @@
         document.getElementById("birthdate").focus();
         document.getElementById("birthdate").placeholder = getMessagesForLanguage().birthdateFormat;
         document.getElementById("quote").textContent = getMessagesForLanguage().motto;
+        document.getElementById("subtitle").textContent = getMessagesForLanguage().subtitle;
+        document.getElementById("cure").textContent = getMessagesForLanguage().cure;
 
         const birthdateLabel = document.getElementById("birthdateLabel");
         birthdateLabel.textContent = getMessagesForLanguage().birthdate;
