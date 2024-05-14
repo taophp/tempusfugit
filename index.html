@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⏳ Tempus fugit, one square per week, artwork by Stéphane Mourey</title>
+    <style>
+        :root {
+            --viewport-aspect-ratio: calc(100vh / 100vw);
+            --background-luminosity: 0;
+        }
+
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: rgb(var(--background-luminosity), var(--background-luminosity), var(--background-luminosity));
+        }
+
+        a {
+            color: lightblue;
+        }
+
+        label,
+        input,
+        button,
+        blockquote {
+            display: block;
+            margin: auto;
+        }
+
+        blockquote {
+            font-style: italic;
+            border-left: 3px solid silver;
+            margin: 1em;
+            padding: 1em .5em 1em 1em;
+            text-align: left;
+            background-color: #222;
+        }
+
+        input {
+            margin-bottom: 1em;
+        }
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+        }
+
+        .row {
+            display: flex;
+            flex: 1;
+        }
+
+        .week {
+            flex-grow: 1;
+            aspect-ratio: var(--viewport-aspect-ratio);
+            border: solid 1px black;
+            margin: 2px;
+        }
+
+        .week.past {
+            background-color: black;
+        }
+
+        .week.future {
+            background-color: white;
+        }
+
+        .week.current {
+            animation: blink 2s infinite;
+        }
+
+        .week.empty {
+            background-color: transparent;
+            border-color: transparent;
+        }
+
+        @keyframes blink {
+            50% {
+                background-color: rgba(0, 0, 0, 0);
+            }
+        }
+
+        #intro {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="intro">
+            <h1>Tempus fugit</h1>
+            <h2>One square per week</h2>
+            <h3><a href="https://stephanemourey.fr" target="_blank">Stéphane Mourey</a></h3>
+            <blockquote id="quote"></blockquote>
+            <form id="user-data-form">
+                <label for="birthdate" id="birthdateLabel"></label>
+                <input type="text" id="birthdate">
+                <label for="lifeExpectancy" id="lifeExpectancyLabel"></label>
+                <input type="number" id="lifeExpectancy" />
+                <input type="submit"></input>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const messages = {
+            fr: {
+                birthdate: "Votre date de naissance",
+                birthdateFormat: "jj/mm/aaaa",
+                lifeExpectancy: "Le nombre d'années que vous espérez vivre",
+                invalidDate: "Date invalide. Veuillez réessayer.",
+                invalidNumber: "Veuillez entrer un nombre entier valide. Réessayez.",
+                here: "Vous êtes ici",
+                motto: "La seule chose que vous maîtrisez, c'est ce à quoi vous allez consacrer le reste de votre temps.",
+            },
+            en: {
+                birthdate: "Your birth date",
+                birthdateFormat: "dd/mm/yyyy",
+                lifeExpectancy: "The number of years you hope to live:",
+                invalidDate: "Invalid date. Please try again.",
+                invalidNumber: "Please enter a valid integer. Try again.",
+                here: "You are here",
+                motto: "The only thing you control is what you will spend the rest of your time on.",
+            },
+        };
+
+        const oneDay = 24 * 60 * 60 * 1000;
+
+        const Dd = new Date();
+
+        document.getElementById("birthdate").focus();
+        document.getElementById("birthdate").placeholder = getMessagesForLanguage().birthdateFormat;
+        document.getElementById("quote").textContent = getMessagesForLanguage().motto;
+
+        const birthdateLabel = document.getElementById("birthdateLabel");
+        birthdateLabel.textContent = getMessagesForLanguage().birthdate;
+
+        const lifeExpectancyLabel = document.getElementById("lifeExpectancyLabel");
+        lifeExpectancyLabel.textContent = getMessagesForLanguage().lifeExpectancy;
+
+        function getMessagesForLanguage() {
+            const userLanguages = navigator.languages || [navigator.language || navigator.userLanguage];
+
+            for (const userLanguage of userLanguages) {
+                for (const [lang, _] of Object.entries(messages)) {
+                    if (userLanguage.startsWith(lang)) {
+                        return messages[lang];
+                    }
+                }
+            }
+
+            return messages.en;
+        }
+
+
+        function setCookie(name, value, days) {
+            const expires = new Date(Date.now() + days * 24 * 60 * 60 * 1000).toUTCString();
+            document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
+        }
+
+        function getCookie(name) {
+            const cookies = document.cookie.split(";");
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.startsWith(`${name}=`)) {
+                    return decodeURIComponent(cookie.substring(`${name}=`.length));
+                }
+            }
+            return null;
+        }
+        function getBirthdateFromForm() {
+            const birthdateInput = document.getElementById("birthdate");
+            const birthdate = new Date(birthdateInput.value.split("/").reverse().join("-"));
+
+            if (isNaN(birthdate)) {
+                alert(messages.invalidDate);
+                birthdateInput.focus();
+                return null;
+            }
+
+            return birthdate;
+        }
+
+        function getLifeExpectancyFromForm() {
+            const lifeExpectancyInput = document.getElementById("lifeExpectancy");
+            const lifeExpectancy = parseInt(lifeExpectancyInput.value);
+
+            if (Number.isNaN(lifeExpectancy) || !Number.isInteger(lifeExpectancy)) {
+                alert(messages.invalidNumber);
+                lifeExpectancyInput.focus();
+                return null;
+            }
+
+            return lifeExpectancy;
+        }
+
+        function calculateWeeksBetween(startDate, endDate) {
+            const start = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+            const end = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate());
+            const timeDifference = end - start;
+            return Math.ceil(timeDifference / (1000 * 60 * 60 * 24 * 7));
+        }
+
+        function isWeekPast(weekStart) {
+            const currentDate = new Date();
+            return weekStart < currentDate;
+        }
+
+        function isCurrentWeek(weekStart) {
+            const currentDate = new Date();
+            const weekEnd = new Date(weekStart);
+            weekEnd.setDate(weekStart.getDate() + 6);
+
+            if (currentDate >= weekStart && currentDate <= weekEnd) {
+                return currentDate.getDay();
+            }
+
+            return -1;
+        }
+
+
+        function setCurrentWeekLuminosity(weekElement) {
+            const currentDay = new Date().getDay();
+            const luminosity = 255 - Math.round((255 * currentDay) / 6);
+            weekElement.style.backgroundColor = `rgb(${luminosity}, ${luminosity}, ${luminosity})`;
+        }
+
+        function calculateColumns(rows, totalWeeks) {
+            const columns = Math.ceil(totalWeeks / rows);
+            return Math.max(columns, Math.ceil(totalWeeks / (rows - 1)));
+        }
+
+        function createEmptyWeekElement() {
+            const weekElement = document.createElement("div");
+            weekElement.classList.add("week", "empty");
+            return weekElement;
+        }
+
+        function setFutureWeekLuminosity(weekElement, futureWeeks) {
+            const maxFutureWeeks = Math.ceil((De - Dd) / (7 * oneDay));
+            const luminosityFactor = futureWeeks / maxFutureWeeks;
+            const luminosity = 255 - Math.round(255 * luminosityFactor);
+            weekElement.style.backgroundColor = `rgb(${luminosity}, ${luminosity}, ${luminosity})`;
+        }
+
+        async function run(birthdate, lifeExpectancy) {
+            document.getElementById("intro").remove();
+
+            Ds = birthdate;
+            const lifeExpectancyInt = parseInt(lifeExpectancy);
+            De = new Date(Ds.getFullYear() + lifeExpectancyInt, Ds.getMonth(), Ds.getDate());
+
+            const diffDsDd = Math.round(Math.abs((Ds - Dd) / oneDay));
+            const diffDsDe = Math.round(Math.abs((Ds - De) / oneDay));
+            const backgroundLuminosity = 255 - Math.round((255 * diffDsDd) / diffDsDe);
+            document.body.style.setProperty('--background-luminosity', backgroundLuminosity);
+
+            const weeksBetween = calculateWeeksBetween(Ds, De);
+            const totalWeeks = weeksBetween;
+            const squareRoot = Math.sqrt(totalWeeks);
+            const rows = Math.ceil(squareRoot);
+            const columns = calculateColumns(rows, totalWeeks);
+            for (let i = 0; i < weeksBetween; i++) {
+                const weekElement = document.createElement("div");
+                weekElement.classList.add("week");
+
+                if (i % columns === 0) {
+                    const row = document.createElement("div");
+                    row.classList.add("row");
+                    container.appendChild(row);
+                }
+                const lastRow = container.lastChild;
+                lastRow.appendChild(weekElement);
+
+                const weekStart = new Date(Ds);
+                weekStart.setDate(Ds.getDate() + i * 7);
+
+                const currentWeekDay = isCurrentWeek(weekStart);
+                if (currentWeekDay !== -1) {
+                    weekElement.classList.add("current");
+                    weekElement.title = getMessagesForLanguage().here;
+                    setCurrentWeekLuminosity(weekElement);
+                } else if (isWeekPast(weekStart)) {
+                    weekElement.classList.add("past");
+                } else {
+                    weekElement.classList.add("future");
+                    const futureWeeks = Math.ceil((weekStart - Dd) / (7 * oneDay));
+                    setFutureWeekLuminosity(weekElement, futureWeeks)
+                }
+
+                lastRow.appendChild(weekElement);
+
+                if (i === totalWeeks - 1 && lastRow.childElementCount < columns) {
+                    for (let j = lastRow.childElementCount; j < columns; j++) {
+                        lastRow.appendChild(createEmptyWeekElement());
+                    }
+                }
+                await new Promise(r => setTimeout(r, 1));
+            }
+        }
+
+        document.getElementById("user-data-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const birthdate = getBirthdateFromForm();
+            if (!birthdate) {
+                return;
+            }
+
+            const lifeExpectancy = getLifeExpectancyFromForm();
+            if (lifeExpectancy === null) {
+                return;
+            }
+
+            setCookie("birthdate", birthdate.toISOString().split("T")[0], 365);
+            setCookie("lifeExpectancy", lifeExpectancy, 365);
+
+            await run(birthdate, lifeExpectancy);
+        });
+
+        birthdateCookie = getCookie("birthdate")
+        lifeExpectancyCookie = getCookie("lifeExpectancy")
+        if (birthdateCookie && lifeExpectancyCookie) {
+            let submitTimeout;
+            document.getElementById("birthdate").value = birthdateCookie ? birthdateCookie.split("-").reverse().join("/") : "";
+            document.getElementById("lifeExpectancy").value = lifeExpectancyCookie || "";
+            submitTimeout = setTimeout(() => { document.getElementById("user-data-form").dispatchEvent(new Event("submit")) }, 10000);
+            const birthdateInput = document.getElementById("birthdate");
+            const lifeExpectancyInput = document.getElementById("lifeExpectancy");
+
+            birthdateInput.addEventListener("input", () => {
+                if (submitTimeout) {
+                    clearTimeout(submitTimeout);
+                }
+            });
+
+            lifeExpectancyInput.addEventListener("input", () => {
+                if (submitTimeout) {
+                    clearTimeout(submitTimeout);
+                }
+            });
+        }
+
+    </script>
+
+</body>
+
+</html>
