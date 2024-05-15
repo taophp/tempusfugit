@@ -134,6 +134,7 @@
             margin-top: -.5em;
             margin-right: -.5em;
             font-size: .8em;
+            cursor: default;
         }
     </style>
 </head>
@@ -474,6 +475,12 @@
             });
             document.getElementById("container").addEventListener("click", () => {
                 document.getElementById("modal").style.display = "flex";
+            });
+            document.getElementById("modal").addEventListener("click", () => {
+                document.getElementById("modal").style.display = "none";
+            });
+            document.getElementById("modal-content").addEventListener("click", (e) => {
+                e.stopPropagation();
             });
 
         });
