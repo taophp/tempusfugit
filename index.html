@@ -8,21 +8,17 @@
     <style>
         :root {
             --viewport-aspect-ratio: calc(100vh / 100vw);
-            --background-luminosity: 0;
+            --background-luminosity: 255;
         }
 
         body {
-            color: white;
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             background-color: rgb(var(--background-luminosity), var(--background-luminosity), var(--background-luminosity));
-        }
-
-        a {
-            color: lightblue;
+            transition: background-color 20s ease-in-out;
         }
 
         label,
@@ -41,7 +37,7 @@
             margin: 1em;
             padding: 1em .5em 1em 1em;
             text-align: left;
-            background-color: #222;
+            background-color: #ddd;
         }
 
         input {
@@ -121,6 +117,7 @@
             padding: 20px;
             border-radius: 4px;
             min-width: 10em;
+            color: #fff;
         }
 
         #close-modal-button {
@@ -491,7 +488,7 @@
             let submitTimeout;
             document.getElementById("birthdate").value = birthdateCookie ? birthdateCookie.split("-").reverse().join("/") : "";
             document.getElementById("lifeExpectancy").value = lifeExpectancyCookie || "";
-            submitTimeout = setTimeout(() => { document.getElementById("user-data-form").dispatchEvent(new Event("submit")) }, 3000);
+            submitTimeout = setTimeout(() => { document.getElementById("user-data-form").dispatchEvent(new Event("submit")) }, 4000);
             const birthdateInput = document.getElementById("birthdate");
             const lifeExpectancyInput = document.getElementById("lifeExpectancy");
 
