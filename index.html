@@ -488,7 +488,7 @@
             let submitTimeout;
             document.getElementById("birthdate").value = birthdateCookie ? birthdateCookie.split("-").reverse().join("/") : "";
             document.getElementById("lifeExpectancy").value = lifeExpectancyCookie || "";
-            submitTimeout = setTimeout(() => { document.getElementById("user-data-form").dispatchEvent(new Event("submit")) }, 4000);
+            submitTimeout = setTimeout(() => { document.getElementById("user-data-form").dispatchEvent(new Event("submit")) }, 10000);
             const birthdateInput = document.getElementById("birthdate");
             const lifeExpectancyInput = document.getElementById("lifeExpectancy");
 
