@@ -240,6 +240,7 @@
                 <iframe src="https://github.com/sponsors/taophp/button" title="Sponsor taophp" height="32" width="114"
                     style="border: 0; border-radius: 6px;"></iframe>
             </div>
+            <div id="inspired"></div>
         </div>
     </div>
 
@@ -255,6 +256,7 @@
                 motto: "La seule chose que vous maîtrisez, c'est ce à quoi vous allez consacrer le reste de votre temps.",
                 subtitle: "Une case par semaine",
                 cure: "Pour soigner la procrastination, faites de ce site votre page d'accueil.",
+                inspired: "Inspiré par <a href='https://youtu.be/arj7oStGLkU?si=M6edeRy05zLuBpVV' target='_blank' style='color:lightblue'>Tim Urban</a>"
             },
             en: {
                 birthdate: "Your birth date",
@@ -266,7 +268,7 @@
                 motto: "The only thing you control is what you will spend the rest of your time on.",
                 subtitle: "One square per week",
                 cure: "To cure procrastination, make this site your home page.",
-
+                inspired: "Inspired by <a href='https://youtu.be/arj7oStGLkU?si=M6edeRy05zLuBpVV' target='_blank' style='color:lightblue'>Tim Urban</a>"
             },
         };
 
@@ -279,6 +281,7 @@
         document.getElementById("quote").textContent = getMessagesForLanguage().motto;
         document.getElementById("subtitle").textContent = getMessagesForLanguage().subtitle;
         document.getElementById("cure").textContent = getMessagesForLanguage().cure;
+        document.getElementById("inspired").innerHTML = getMessagesForLanguage().inspired;
 
         const birthdateLabel = document.getElementById("birthdateLabel");
         birthdateLabel.textContent = getMessagesForLanguage().birthdate;
@@ -300,7 +303,6 @@
             return messages.en;
         }
 
-
         function setCookie(name, value, days) {
             const expires = new Date(Date.now() + days * 24 * 60 * 60 * 1000).toUTCString();
             document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
@@ -316,6 +318,7 @@
             }
             return null;
         }
+        
         function getBirthdateFromForm() {
             const birthdateInput = document.getElementById("birthdate");
             const birthdate = new Date(birthdateInput.value.split("/").reverse().join("-"));
