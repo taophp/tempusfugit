@@ -2,6 +2,7 @@
 <html lang="fr">
 
 <head>
+    <script src="js/html2canvas.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>⏳ Tempus fugit, one square per week, artwork by Stéphane Mourey</title>
@@ -171,8 +172,74 @@
 
     <div id="modal">
         <div id="modal-content">
-            <div><div id="close-modal-button">x</div>
-                <h2>Follow</h2>
+            <div>
+                <div id="close-modal-button">x</div>
+                <h2 id="share"></h2>
+                <p style="cursor:pointer"><span title="Share on X"><svg fill="#fff" version="1.1" id="shareX"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                            height="24px" viewBox="0 0 33.88 33.88" xml:space="preserve" stroke="#fff">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <g>
+                                    <path
+                                        d="M30.414,10.031c0.014,0.297,0.021,0.595,0.021,0.897c0,9.187-6.992,19.779-19.779,19.779c-3.928,0-7.58-1.149-10.657-3.123 c0.546,0.063,1.099,0.095,1.658,0.095c3.26,0,6.254-1.107,8.632-2.974c-3.039-0.058-5.607-2.065-6.491-4.828 c0.424,0.082,0.858,0.125,1.308,0.125c0.635,0,1.248-0.084,1.83-0.244c-3.177-0.639-5.576-3.448-5.576-6.815 c0-0.029,0-0.058,0-0.087c0.939,0.521,2.01,0.833,3.15,0.869C2.646,12.48,1.419,10.35,1.419,7.938c0-1.274,0.343-2.467,0.94-3.495 c3.427,4.206,8.552,6.973,14.327,7.263c-0.117-0.509-0.18-1.038-0.18-1.584c0-3.838,3.112-6.949,6.953-6.949 c1.998,0,3.805,0.844,5.07,2.192c1.582-0.311,3.072-0.89,4.416-1.686c-0.521,1.624-1.621,2.986-3.057,3.844 c1.406-0.166,2.746-0.54,3.991-1.092C32.949,7.826,31.771,9.05,30.414,10.031z">
+                                    </path>
+                                </g>
+                            </g>
+                        </svg></span>
+                    <span title="Share on Facebook"><svg id="shareFacebook" fill="#fff" width="24px" height="24px"
+                            viewBox="0 0 32 32" id="Camada_1" version="1.1" xml:space="preserve"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" stroke="#fff">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <style type="text/css">
+                                    .st0 {
+                                        fill-rule: evenodd;
+                                        clip-rule: evenodd;
+                                    }
+                                </style>
+                                <path class="st0"
+                                    d="M12.6,16.1v11.6c0,0.2,0.1,0.3,0.3,0.3h4.6c0.2,0,0.3-0.1,0.3-0.3V15.9h3.4c0.2,0,0.3-0.1,0.3-0.3l0.3-3.6 c0-0.2-0.1-0.3-0.3-0.3h-3.7V9.2c0-0.6,0.5-1.1,1.2-1.1h2.6C21.9,8.1,22,8,22,7.8V4.3C22,4.1,21.9,4,21.7,4h-4.4 c-2.6,0-4.7,1.9-4.7,4.3v3.4h-2.3c-0.2,0-0.3,0.1-0.3,0.3v3.6c0,0.2,0.1,0.3,0.3,0.3h2.3V16.1z">
+                                </path>
+                            </g>
+                        </svg></span>
+                    <span title="Share on LinkedId"><svg id="shareLinkedIn" fill="#fff" version="1.1" id="Capa_1"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                            height="24px" viewBox="0 0 32 32" xml:space="preserve" stroke="#fff">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <g>
+                                    <path
+                                        d="M17.303,14.365c0.012-0.015,0.023-0.031,0.031-0.048v0.048H17.303z M32,0v32H0V0H32L32,0z M9.925,12.285H5.153v14.354 h4.772V12.285z M10.237,7.847c-0.03-1.41-1.035-2.482-2.668-2.482c-1.631,0-2.698,1.072-2.698,2.482 c0,1.375,1.035,2.479,2.636,2.479h0.031C9.202,10.326,10.237,9.222,10.237,7.847z M27.129,18.408c0-4.408-2.355-6.459-5.494-6.459 c-2.531,0-3.664,1.391-4.301,2.368v-2.032h-4.77c0.061,1.346,0,14.354,0,14.354h4.77v-8.016c0-0.434,0.031-0.855,0.157-1.164 c0.346-0.854,1.132-1.746,2.448-1.746c1.729,0,2.418,1.314,2.418,3.246v7.68h4.771L27.129,18.408L27.129,18.408z">
+                                    </path>
+                                </g>
+                            </g>
+                        </svg></span>
+
+                    <span title="Share on Reddit"><svg id="shareReddit" width="24px" height="24px" viewBox="0 0 24 24"
+                            fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path
+                                    d="M9 13C8.44772 13 8 13.4477 8 14C8 14.5523 8.44772 15 9 15C9.55229 15 10 14.5523 10 14C10 13.4477 9.55229 13 9 13Z"
+                                    fill="#F0f0f0"></path>
+                                <path
+                                    d="M14 14C14 13.4477 14.4477 13 15 13C15.5523 13 16 13.4477 16 14C16 14.5523 15.5523 15 15 15C14.4477 15 14 14.5523 14 14Z"
+                                    fill="#F0f0f0"></path>
+                                <path
+                                    d="M8.29289 16.7929C8.97405 16.1117 9.57505 16.7945 10.1972 17.1056C10.5749 17.2944 11.1728 17.5 12 17.5C12.8272 17.5 13.4251 17.2944 13.8028 17.1056C14.4249 16.7945 15.0259 16.1117 15.7071 16.7929C16.5738 17.6596 15.4209 18.5326 14.6972 18.8944C14.0749 19.2056 13.1728 19.5 12 19.5C10.8272 19.5 9.92507 19.2056 9.30279 18.8944C8.57552 18.5308 7.44766 17.6381 8.29289 16.7929Z"
+                                    fill="#F0f0f0"></path>
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M12.4703 1.15182C12.7232 0.993884 13.0334 0.957034 13.3162 1.05132L16.6328 2.15685C17.1818 1.45278 18.038 1 19 1C20.6569 1 22 2.34315 22 4C22 5.65686 20.6569 7 19 7C17.3613 7 16.0294 5.68608 16.0005 4.05426L13.8314 3.33121L13.0711 9.03277C14.2994 9.1083 15.4685 9.31237 16.545 9.62357C17.166 8.64754 18.2574 8 19.5 8C21.433 8 23 9.56701 23 11.5C23 12.2757 22.7477 12.9924 22.3206 13.5726C22.76 14.3288 23 15.1466 23 16C23 19.866 18.0751 23 12 23C5.92487 23 1 19.866 1 16C1 15.1466 1.23999 14.3288 1.67937 13.5726C1.25233 12.9924 1 12.2757 1 11.5C1 9.56701 2.567 8 4.5 8C5.74259 8 6.83394 8.64754 7.45501 9.62358C8.56809 9.30178 9.78028 9.09454 11.0544 9.02551L12.0088 1.86784C12.0482 1.5723 12.2174 1.30975 12.4703 1.15182ZM20 4C20 4.55229 19.5523 5 19 5C18.4477 5 18 4.55229 18 4C18 3.44772 18.4477 3 19 3C19.5523 3 20 3.44772 20 4ZM18.7044 12.7376C20.3517 13.7858 21 14.988 21 16C21 17.012 20.3517 18.2142 18.7044 19.2624C17.0809 20.2956 14.7159 21 12 21C9.28405 21 6.91908 20.2956 5.29558 19.2624C3.64835 18.2142 3 17.012 3 16C3 14.988 3.64835 13.7858 5.29558 12.7376C6.91908 11.7044 9.28405 11 12 11C14.7159 11 17.0809 11.7044 18.7044 12.7376ZM18.5221 10.3626C19.5949 9.4393 21.352 10.5086 20.9402 11.9207C20.2671 11.3244 19.4503 10.7982 18.5221 10.3626ZM3.05982 11.9207C3.73291 11.3244 4.5497 10.7982 5.47793 10.3626C4.40504 9.43929 2.64794 10.5086 3.05982 11.9207Z"
+                                    fill="#F0f0f0"></path>
+                            </g>
+                        </svg></span>
+                </p>
+                <h2 id="follow"></h2>
                 <a href="https://github.com/taophp/tempusfugit" target="_blank" alt="The Github page of the project">
                     <svg height="24px" width="24px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
                         xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 291.32 291.32" xml:space="preserve"
@@ -256,7 +323,12 @@
                 motto: "La seule chose que vous maîtrisez, c'est ce à quoi vous allez consacrer le reste de votre temps.",
                 subtitle: "Une case par semaine",
                 cure: "Pour soigner la procrastination, faites de ce site votre page d'accueil.",
-                inspired: "Inspiré par <a href='https://youtu.be/arj7oStGLkU?si=M6edeRy05zLuBpVV' target='_blank' style='color:lightblue'>Tim Urban</a>"
+                inspired: "Inspiré par <a href='https://youtu.be/arj7oStGLkU?si=M6edeRy05zLuBpVV' target='_blank' style='color:lightblue'>Tim Urban</a>",
+                follow: "Suivre",
+                share: "Partager",
+                copied: "Image copiée dans le presse-papier",
+                errorOnCopy: "Erreur lors de la copie de l'image dans le presse-papier",
+                shareMsg: "Je viens de vivre une expérience émouvante et fascinante avec Tempus Fugit. Entrez votre date de naissance et votre espérance de vie pour voir votre propre voyage dans le temps. Une véritable prise de conscience sur notre passage éphémère. #TempusFugit",
             },
             en: {
                 birthdate: "Your birth date",
@@ -268,7 +340,12 @@
                 motto: "The only thing you control is what you will spend the rest of your time on.",
                 subtitle: "One square per week",
                 cure: "To cure procrastination, make this site your home page.",
-                inspired: "Inspired by <a href='https://youtu.be/arj7oStGLkU?si=M6edeRy05zLuBpVV' target='_blank' style='color:lightblue'>Tim Urban</a>"
+                inspired: "Inspired by <a href='https://youtu.be/arj7oStGLkU?si=M6edeRy05zLuBpVV' target='_blank' style='color:lightblue'>Tim Urban</a>",
+                follow: "Follow",
+                share: "Share",
+                copied: "Picture copied in clipboard",
+                errorOnCopy: "Error when copying picture in clipboard",
+                shareMsg: "I have just had a moving and fascinating experience with Tempus Fugit. Enter your date of birth and life expectancy to see your own journey through time. A real awareness of our fleeting passage. #TempusFugit",
             },
         };
 
@@ -282,7 +359,8 @@
         document.getElementById("subtitle").textContent = getMessagesForLanguage().subtitle;
         document.getElementById("cure").textContent = getMessagesForLanguage().cure;
         document.getElementById("inspired").innerHTML = getMessagesForLanguage().inspired;
-
+        document.getElementById("share").innerHTML = getMessagesForLanguage().share;
+        document.getElementById("follow").innerHTML = getMessagesForLanguage().follow;
         const birthdateLabel = document.getElementById("birthdateLabel");
         birthdateLabel.textContent = getMessagesForLanguage().birthdate;
 
@@ -318,7 +396,7 @@
             }
             return null;
         }
-        
+
         function getBirthdateFromForm() {
             const birthdateInput = document.getElementById("birthdate");
             const birthdate = new Date(birthdateInput.value.split("/").reverse().join("-"));
@@ -447,8 +525,51 @@
                         lastRow.appendChild(createEmptyWeekElement());
                     }
                 }
-                await new Promise(r => setTimeout(r, 1));
+                await new Promise(r => setTimeout(r, 5));
             }
+            setTimeout(() => { document.getElementById("modal").style.display = "flex"; }, 5000);
+        }
+
+        document.getElementById('shareX').addEventListener('click', () => share('X'));
+        document.getElementById('shareFacebook').addEventListener('click', () => share('facebook'));
+        document.getElementById('shareLinkedIn').addEventListener('click', () => share('linkedin'));
+        document.getElementById('shareReddit').addEventListener('click', () => share('reddit'));
+
+        async function share(platform) {
+            const element = document.getElementById('container');
+            const canvas = await html2canvas(element);
+
+            canvas.toBlob(async (blob) => {
+                try {
+                    const item = new ClipboardItem({ 'image/png': blob });
+                    await navigator.clipboard.write([item]);
+                    alert(getMessagesForLanguage().copied);
+                } catch (err) {
+                    console.error(getMessagesForLanguage().errorOnCopy, err);
+                }
+
+                const text = encodeURIComponent(getMessagesForLanguage().shareMsg);
+                const url = encodeURIComponent(window.location.href);
+
+                let shareUrl;
+                switch (platform) {
+                    case 'X':
+                        shareUrl = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+                        break;
+                    case 'facebook':
+                        shareUrl = `https://www.facebook.com/sharer.php?u=${url}&t=${text}`;
+                        break;
+                    case 'linkedin':
+                        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}&title=${text}`;
+                        break;
+                    case 'reddit':
+                        shareUrl = `https://www.reddit.com/submit?url=${url}&title=${text}`;
+                        break;
+                    default:
+                        return;
+                }
+                window.open(shareUrl, '_blank');
+            }, 'image/png');
         }
 
         document.getElementById("user-data-form").addEventListener("submit", async (e) => {
@@ -482,7 +603,6 @@
             document.getElementById("modal-content").addEventListener("click", (e) => {
                 e.stopPropagation();
             });
-
         });
 
         birthdateCookie = getCookie("birthdate")
@@ -491,7 +611,7 @@
             let submitTimeout;
             document.getElementById("birthdate").value = birthdateCookie ? birthdateCookie.split("-").reverse().join("/") : "";
             document.getElementById("lifeExpectancy").value = lifeExpectancyCookie || "";
-            submitTimeout = setTimeout(() => { document.getElementById("user-data-form").dispatchEvent(new Event("submit")) }, 10000);
+            submitTimeout = setTimeout(() => { try { document.getElementById("user-data-form").dispatchEvent(new Event("submit")); } catch (err) { } }, 10000);
             const birthdateInput = document.getElementById("birthdate");
             const lifeExpectancyInput = document.getElementById("lifeExpectancy");
 
@@ -507,7 +627,6 @@
                 }
             });
         }
-
     </script>
 
 </body>
